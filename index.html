@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <title>Visa Form</title>
+  
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+    <link href="https://fonts.googleapis.com/css?family=Amaranth:700i" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat+Alternates" rel="stylesheet">
+  
+    <link href="https://fonts.googleapis.com/css?family=Maven+Pro" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:300i" rel="stylesheet">
+  
+    
+    <link rel="stylesheet" href="style.css">
+    
+  </head>
+  <body>
+    <div class="container mt-5">
+      <div class="row">
+<!-- Photo de profil à gauche -->
+<div class="col-md-6" style="align-self: flex-start;">
+  <div class="form-group">
+      <label for="profile-picture">Votre photo:</label>
+      <div id="profile-picture-container">
+          <input
+              type="file"
+              id="profile-picture"
+              name="profile-picture"
+              accept="image/*"
+              onchange="displayImage(event)"
+          />
+          <div
+              id="profile-picture-placeholder"
+              onclick="openImageUploader()"
+          >
+              <img
+                  src="default-avatar.png"
+                  alt="Profile Picture"
+                  id="preview-image"
+              />
+              <span>votre photo</span>
+          </div>
+      </div>
+  </div>
+</div>
+
+
+            <!-- Formulaire à droite -->
+            <div class="col-md-6 form-right">
+              <form
+                action="process.php"
+                method="post"
+                onsubmit="return validateForm()"
+          >
+             <!-- fr/arabe -->
+          <div class="box">
+            <div class="form-group">
+              <label for="nom">Nom:</label>
+              <input
+                type="text"
+                class="form-control"
+                id="nom"
+                name="nom"
+                required
+                onblur="checkEmpty(this, 'nom-error')"
+                onkeyup="formatFields(this)"
+              />
+              <div id="nom-error" class="error-message"></div>
+            </div>
+
+  
+            <div class="form-group">
+              <label for="prenom">Prénom:</label>
+              <input
+                type="text"
+                class="form-control"
+                id="prenom"
+                name="prenom"
+                required
+                onblur="checkEmpty(this, 'prenom-error')"
+                onkeyup="formatFields(this)"
+              />
+              <div id="prenom-error" class="error-message"></div>
+            </div>
+
+   
+
+         
+            <div class="form-group">
+              <label for="mother-name">Nom de la mère:</label>
+              <input
+                type="text"
+                class="form-control"
+                id="mother-name"
+                name="mother-name"
+                onblur="checkEmpty(this, 'merror')"
+                required
+              />
+            </div id="merror" class="error-message">
+<!-- fr/arabe -->
+</div>
+             <!-- fr/arabe -->
+             <div class="box">
+              <div class="form-group">
+                <label for="nom">اللقب</label>
+                <input
+                  type="text"
+        
+                  class="form-control"
+                  id="nom"
+                  name="nom"
+                  required
+                  onblur="checkEmpty(this, 'nom-errorAr')"
+                  onkeyup="formatFields(this)"
+                />
+                <div id="nom-errorAr" class="error-message"></div>
+              </div>
+  
+    
+              <div class="form-group">
+                <label for="prenom">الاسم</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="prenom"
+                  name="prenom"
+                  required
+                  onblur="checkEmpty(this, 'prenom-errorAr')"
+                  onkeyup="formatFields(this)"
+                />
+                <div id="prenom-errorAr" class="error-message"></div>
+              </div>
+  
+     
+  
+           
+              <div class="form-group">
+                <label for="mother-name">اسم الام</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="mother-name"
+                  name="mother-name"
+                  onblur="checkEmpty(this, 'merrorAr')"
+                  required
+                />
+              </div id="merrorAr" class="error-message">
+  <!-- fr/arabe -->
+ 
+
+  </div>
+  <div>
+  
+  
+      
+              
+              <div class="box">
+                <label for="prev-nationality">Ancienne nationalité / الجنسية السابقة:</label>
+                <select
+                  id="prev-nationality"
+                  name="prev-nationality"
+                  class="form-control"
+                  onchange="checkEmpty(this, 'NatError')"
+                  required
+                >
+                  <option value="">Sélectionner une ancienne nationalité</option>
+                  <option value="algerie">Algerie</option>
+                  <option value="france">France</option>
+                  <option value="usa">États-Unis</option>
+                  <option value="germany">Allemagne</option>
+                  <option value="japan">Japon</option>
+                  <option value="china">Chine</option>
+                  <option value="india">Inde</option>
+                  <option value="uk">Royaume-Uni</option>
+                  <option value="brazil">Brésil</option>
+                  <option value="canada">Canada</option>
+                  <option value="australia">Australie</option>
+                  <!-- Ajoutez d'autres options pour les nationalités -->
+                </select>
+                <div id="NatError" class="error-message"></div>
+              </div>
+              
+              <div class="box">
+                <label for="present-nationality">Nationalité actuelle / الجنسية الحالية:</label>
+                <select
+                  id="present-nationality"
+                  name="present-nationality"
+                  class="form-control"
+                  onchange="updatePlaceOfBirthOptions(this.value)"
+                  required
+                >
+                  <option value="">Sélectionner une nationalité actuelle</option>
+                  <option value="algerie">Algerie</option>
+                  <option value="france">France</option>
+                  <option value="usa">États-Unis</option>
+                  <option value="germany">Allemagne</option>
+                  <option value="japan">Japon</option>
+                  <option value="china">Chine</option>
+                  <option value="india">Inde</option>
+                  <option value="uk">Royaume-Uni</option>
+                  <option value="brazil">Brésil</option>
+                  <option value="canada">Canada</option>
+                  <option value="australia">Australie</option>
+                  <!-- Ajoutez d'autres options pour les nationalités -->
+                </select>
+                <div id="preNat" class="error-message"></div>
+              </div>
+              
+              <div class="box">
+                <label for="date-of-birth">Date de naissance / تاريخ الميلاد :</label>
+  <input
+    type="date"
+    class="form-control"
+    id="date-of-birth"
+    name="date-of-birth"
+    oninput="validateDOB(this)"
+    required
+  />
+  <div id="dob-error" class="error-message"></div>
+             
+                <div id="DateOfBirthError" class="error-message"></div>
+              </div>
+              
+              <div class="box">
+                <label for="place-of-birth">Lieu de naissance / مكان الميلاد:</label>
+  <select
+    id="place-of-birth"
+    name="place-of-birth"
+    class="form-control"
+    onblur="checkEmpty(this, 'PlaceOfBirthError')"
+    required
+  >
+    <option value="">Sélectionner un lieu de naissance</option>
+  </select>
+                <div id="PlaceOfBirthError" class="error-message"></div>
+              </div>
+              
+            </div>
+
+            <div class="form-row">
+              <div class="box">
+                <label for="sex">Sexe / الجنس:</label>
+                <select class="form-control" id="sex" name="sex"  required>
+                  <option value="">Sélectionnez</option>
+                  <option value="male">Masculin</option>
+                  <option value="female">Féminin</option>
+                </select>
+              </div >
+              <div class="box">
+                <label for="status">Statut / الوضعية:</label>
+                <select class="form-control" id="status" name="status" required>
+                  <option value="">Sélectionnez</option>
+                  <option value="single">Célibataire</option>
+                  <option value="married">Marié(e)</option>
+                  <option value="divorced">Divorcé(e)</option>
+                  <option value="widowed">Veuf/Veuve</option>
+                </select>
+              </div >
+            </div>
+
+            <div class="form-row">
+              <div class="box">
+                <label for="religion">Religion / الديانة:</label>
+                <select
+                class="form-control"
+                id="religion"
+                name="religion"
+                onchange="updateTravelAndSectOptions()"
+                required
+                >
+                  <option value="">Sélectionnez une religion</option>
+                  <option value="islam">Islam</option>
+                  <option value="christianity">Christianisme</option>
+                  <option value="judaism">Judaïsme</option>
+                  <option value="athiest">Athiest</option>
+                  <!-- Ajoutez d'autres options de religion si nécessaire -->
+                </select>
+                <div id="relig" class="error-message"></div>
+              </div>
+              <div class="box">
+                <label for="sect">Secte / المذهب:</label>
+                <select class="from-control" name="sect" id="sect"  >
+                  <option value="">Sélectionnez un sect</option>
+                  <option value="Maliky">المالكي</option>
+                  <option value="Hanbali">الحنبلي</option>
+                  <option value="Chafiai">الشافعي</option>
+                  <option value="Hanafi">الحنفي</option>
+                </select>
+              </div id="sectrr" class="error-message">
+            
+              
+            </div>
+
+            <div class="form-row">
+              <div class="form-group col-md-4">
+                <label for="profession">Profession / المهنة:</label>
+  <select
+    id="profession"
+    name="profession"
+    class="form-control"
+    onblur="checkEmpty(this, 'proff')"
+    required
+  >
+    <option value="">Sélectionnez une profession</option>
+    <!-- Options de profession à ajouter ici -->
+  </select>
+              </div id="proff" class="error-message">
+              <div class="box">
+                <label for="place-issue">Lieu de délivrance /مصدره:</label>
+  <select
+    id="place-issue"
+    name="place-issue"
+    class="form-control"
+    onblur="checkEmpty(this, 'place')"
+    required
+  >
+    <option value="">Sélectionnez un lieu de délivrance</option>
+    <!-- Options de lieu de délivrance à ajouter ici -->
+  </select>
+              </div id="place" class="error-message">
+              <div class="box">
+                <label for="qualification">Qualification / المؤهل العلمي:</label>
+                <select
+                  id="qualification"
+                  name="qualification"
+                  class="form-control"
+                  onblur="checkEmpty(this, 'qual')"
+                  required
+                >
+                  <option value="">Sélectionnez une qualification</option>
+                  <!-- Options de qualification à ajouter ici -->
+                </select>
+              </div id="qual" class="error-message">
+              
+            </div>
+
+            <!-- Adresse personnelle et numéro de téléphone -->
+            <div class="form-group">
+              <label for="home-address"
+                >Adresse personnelle et téléphone / عنوان المنزل والهاتف:</label
+              >
+              <textarea
+                class="form-control"
+                id="home-address"
+                name="home-address"
+                rows="3"
+                onblur="checkEmpty(this, 'adr1')"
+                required
+              ></textarea>
+            </div id="adr1" class="error-message"> 
+
+            <!-- Adresse professionnelle et numéro de téléphone -->
+            <div class="form-group">
+              <label for="business-address"
+                >Adresse professionnelle et téléphone / عنوان العمل والهاتف:</label
+              >
+              <textarea
+                class="form-control"
+                id="business-address"
+                name="business-address"
+                rows="3"
+                onblur="checkEmpty(this, 'adr2')"
+                required
+              ></textarea>
+            </div id="adr2" class="error-message">
+
+            <div class="form-group">
+              <label for="purpose-travel">But du voyage / الغاية من السفر:</label>
+              <select
+                class="form-control"
+                id="purpose-travel"
+                name="purpose-travel"
+                required
+              >
+                <option value="">Sélectionnez</option>
+                <option value="work">Travail</option>
+                <option value="transit">Transit</option>
+                <option value="visit">Visite</option>
+                <option value="umrah">Omra</option>
+                <option value="residence">Résidence</option>
+                <option value="hajj">Hajj</option>
+              </select>
+              <div class="box">
+                <label for="passport-number">Numéro de passeport / رقم الجواز:</label>
+                <input type="number" id="passport-number" name="passport-number" 
+             
+                required />
+              </div>
+            
+              <div class="box">
+                <label for="date-of-issue">Date de délivrance / تاريخ الاصدار:</label>
+                <input type="date" id="date-of-issue" name="date-of-issue" oninput="validateDates()" required />
+              </div>
+              
+              <div class="box">
+                <label for="date-of-expiry">Date d'expiration / تاريخ نهاية الصلاحية:</label>
+                <input type="date" id="date-of-expiry" name="date-of-expiry" oninput="validateDates()" required />
+              </div>
+              
+            
+              <div class="box">
+                <label for="country-of-issue">Pays de délivrance / بلد الاصدار :</label>
+                <select id="country-of-issue" name="country-of-issue" required>
+                  <option value="algerie">Algerie</option>
+                  <option value="france">France</option>
+                  <option value="usa">États-Unis</option>
+                  <option value="germany">Allemagne</option>
+                  <option value="japan">Japon</option>
+                  <option value="china">Chine</option>
+                  <option value="india">Inde</option>
+                  <option value="uk">Royaume-Uni</option>
+                  <option value="brazil">Brésil</option>
+                  <option value="canada">Canada</option>
+                  <option value="australia">Australie</option>
+                </select>
+              </div>
+              <div >
+                <label for="duration-of-stay">Durée du séjour / مدة الاقامة:</label>
+                <input type="text" id="duration-of-stay" name="duration-of-stay" />
+              </div>
+              
+              <div class="box">
+                <label for="date-of-arrival">Date d'arrivée / تاريخ الوصول:</label>
+                <input type="date" id="date-of-arrival" name="date-of-arrival" onchange="validateDates()" />
+              </div>
+              
+              <div class="box">
+                <label for="date-of-departure">Date de départ / تاريخ الاطلاق :</label>
+                <input type="date" id="date-of-departure" name="date-of-departure" onchange="validateDates()" />
+              </div>
+              <div >
+                <label for="mode-of-payment">Mode de paiement / طريقة الدفع :</label>
+                <select id="mode-of-payment" name="mode-of-payment" class="form-control">
+                  <option value="" disabled selected>Sélectionnez un mode de paiement</option>
+                  <option value="visa">Visa</option>
+                  <option value="mastercard">Mastercard</option>
+                  <option value="paypal">PayPal</option>
+                  <option value="amex">American Express</option>
+                  <option value="discover">Discover</option>
+                  <option value="applepay">Apple Pay</option>
+                  <option value="googlepay">Google Pay</option>
+                  <option value="banktransfer">Virement bancaire</option>
+                  <option value="cash">Espèces</option>
+                  <option value="cryptocurrency">Cryptomonnaie</option>
+                  <!-- Ajoutez d'autres modes de paiement au besoin -->
+                </select>
+              </div>
+              <div class="box">
+                <label for="rel">Relation / العلاقة</label>
+                <input
+                title="rel"
+                  type="text"
+                  class="form-control"
+                  id="rel"
+                  name="rel"
+             
+                  required
+                />
+              </div >
+              <div class="box">
+                <label for="nameo">Nom de mahram /اسم المحرم</label>
+                <input
+                title="mahram"
+                  type="text"
+                  class="form-control"
+                  id="mahram"
+                  name="mahram"
+             
+                  required
+                />
+              </div >
+              <div class="form-group">
+                <label for="transport-company">Nom de la société de transport / اسم شركة النقل:</label>
+                <select class="form-control" id="transport-company">
+                  <!-- Populate the select options using the new function populateTransportCompanyOptions() -->
+                </select>
+              </div>
+              
+              <div class="form-group">
+                <label for="destination">Destination / الوجهة:</label>
+                <select class="form-control" id="destination">
+                  <!-- Populate the select options using the new function populateDestinationOptions() -->
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="traveling-persons-table">Personnes voyageant avec le même passeport /  الاشخاص المضافين بنفس جواز السفر:</label><button type="button" class="add-person-button" onclick="addTravelingPerson()">Ajouter une personne</button>
+                <table id="traveling-persons-table" class="table">
+                   <thead>
+                      <tr>
+                         <th>Nom et prénom</th>
+                         <th>Sexe</th>
+                         <th>Date de naissance</th>
+                         <th>Relation</th>
+                      </tr>
+                   </thead>
+                   <tbody>
+                      <!-- Table rows will be added dynamically using JavaScript -->
+                   </tbody>
+                </table>
+              </div>
+              <div >
+                <br>
+                <label for="destination-entity">Nom et adresse de l'entreprise ou de l'individu à destination / اسم وعنوان الشركة أو الفرد بالوجهة:</label>
+                <input type="text" id="destination-entity" name="destination-entity" />
+              </div>
+            </div >
+
+            <button type="submit" class="btn btn-primary">Soumettre</button>
+          </form>
+        </div>
+      </div>
+    </div>
+    <!-- Add the new select elements for the name of the transport company and the destination -->
+
+
+   <script src="script.js"></script>
+    
+   
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  </body>
+</html>
